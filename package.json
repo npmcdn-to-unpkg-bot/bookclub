@@ -19,6 +19,7 @@
   "homepage": "https://github.com/gbhojraj/bookclub#readme",
   "dependencies": {
     "express": "^4.13.4",
-    "passport": "^0.3.2"
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.0"
   }
 }
