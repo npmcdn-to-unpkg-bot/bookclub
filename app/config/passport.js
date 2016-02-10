@@ -22,8 +22,8 @@ passport.use(new FacebookStrategy({
     profileFields: ['id', 'displayName', 'photos', 'email']
 },
 function(accessToken, refreshToken, profile, done){
-    console.log(profile);
-   User.findOne({'profile._id': profile.id}, function(err, user){
+    
+   User.findById(profile.id, function(err, user){
        if(err){return done(err);} 
        if(user){
            return done(null, user);
@@ -31,13 +31,14 @@ function(accessToken, refreshToken, profile, done){
            var newUser = new User();
 
            newUser._id = profile.id;
-           newUser.name = profile.name;
+           newUser.name = profile.displayName;
+           newUser.pic = profile.photos[0].value;
            
            
-     //      newUser.save(function(err){
-     //          if(err){throw err;}
-     //     });
-           
+           newUser.save(function(err){
+               console.log("\nTrying to save\n");
+               if(err){console.log(err); throw err;}
+          });
            return done(null, newUser);
        }
 }

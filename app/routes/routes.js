@@ -1,9 +1,12 @@
 'use strict';
 var p = process.cwd() + '/app';
+var pSjs = require("../controllers/profiles.Server.js");
 
 module.exports = function(app, passport){
  
-     function isLoggedIn(req, res, next){
+    var pSjsI = new pSjs();
+ 
+    function isLoggedIn(req, res, next){
         if(req.isAuthenticated()){
             return next();
         } else {
@@ -17,7 +20,7 @@ module.exports = function(app, passport){
     });
     
     app.route('/profile')
-    .get(function(req, res){
+    .get(isLoggedIn, function(req, res){
         res.sendFile(p + '/public/profile.html');
     });
     
@@ -25,6 +28,9 @@ module.exports = function(app, passport){
     .get(function(req, res){
         res.sendFile(p + '/public/login.html');
     });
+    
+    app.route('/my')
+    .get(isLoggedIn, pSjsI.myProfile);
     
     app.route('/auth/facebook')
     .get(passport.authenticate('facebook'));
