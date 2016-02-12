@@ -19,15 +19,14 @@
     .directive("addBookOne", function(){
         return {
             restrict: 'E',
-            templateUrl: "/public/addBooktemp.html"
+            templateUrl: "/public/addBooktemp.html",
+            link: function(scope, elem, attr){
+                var stepone = elem.find("#stepone");
+                stepone.on('click', function(){
+                   //Post the data from the form here. 
+                });
+            }
         };
-    });
-    
-    $('.searchbooks').click(function(){
-       var x = $('#title').val();
-       var y = $('#author').val();
-       
-       console.log(x + " " + y);
     });
     
 })();
