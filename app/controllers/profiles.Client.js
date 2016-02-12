@@ -16,17 +16,22 @@
            templateUrl: '/public/profileBox.html'
        } 
     })
-    .directive("addBookOne", function(){
+    .directive("addBookOne", ['$http', function($http){
         return {
             restrict: 'E',
             templateUrl: "/public/addBooktemp.html",
             link: function(scope, elem, attr){
                 var stepone = elem.find("#stepone");
                 stepone.on('click', function(){
-                   //Post the data from the form here. 
+                   //GET
+                   var x = elem.find("#title").val();
+                   var y = elem.find("#author").val();
+                   $http.get('https://www.googleapis.com/books/v1/volumes?q=' + x + '+inauthor:' + y).then(function(result){
+                       console.log(result);
+                   });
                 });
             }
         };
-    });
+    }]);
     
 })();
