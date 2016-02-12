@@ -1,0 +1,13 @@
+<form class="col-md-5" ng-init="step = 1">
+    <div class="form-group" ng-show="step == 1">
+        <labek for="title">Title: </labek>
+        <input type="text" name="title" id="title" class="form-control"/>
+        <label for="author">Author: </label>
+        <input type="text" name="author" id="author" class="form-control"/>
+        <button ng-show="done" ng-click="step = step + 1" class="btn btn-default searchbooks"/>
+    </div>
+    <div class="form-group" ng-show="step == 2">
+        Which of these books do you mean?
+    </div>
+        
+</form>

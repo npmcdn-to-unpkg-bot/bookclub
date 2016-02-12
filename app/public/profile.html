@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="profile" ng-controller="proInfo as proInfor">
     <head>
+        <title>{{name}}'s Book Club Profile!</title>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
         <script type="text/javascript" src="/app/controllers/profiles.Client.js"></script>
@@ -11,7 +12,8 @@
 
     </head>
     <body>
-        <div class="img-responsive img-circle"><img ng-src={{pic}}></div>
-            This is your book club profile, {{name}}!
+            <profile-box></profile-box>
+            <button ng-click="addbook = !addbook">Add A Book &plus;</button>
+            <add-book-one ng-show="addbook"></add-book-one>
     </body>
 </html>

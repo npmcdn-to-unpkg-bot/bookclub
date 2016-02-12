@@ -9,6 +9,7 @@ var User = new Schema({
    pic: String,
    books: [{
        title: String,
+       cover: String,
        author: String,
        tags: [String]
    }]
