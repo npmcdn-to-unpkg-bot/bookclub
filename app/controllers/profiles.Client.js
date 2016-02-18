@@ -27,10 +27,9 @@
                    var x = elem.find("#title").val();
                    var y = elem.find("#author").val();
                    $http.get('https://www.googleapis.com/books/v1/volumes?q=' + x + '+inauthor:' + y).then(function(result){
-                       console.log(result);
                        scope.books = result.data.items;
                        console.log(scope.books);
-                       elem.html("<div><ul><li ng-repeat='book in books'>{{book.volumeInfo.title}}</li></ul></div>");
+                       elem.html("<div><ul><li class='bkli' ng-repeat='book in books'><div class='text-center bkinfo'>{{book.volumeInfo.title}}</div><img class='bkcvr' ng-src={{book.volumeInfo.imageLinks.thumbnail}}><div class='bkinfo text-center'>By: <span ng-repeat='author in book.volumeInfo.authors'>{{author}} </span></div></li></ul></div>");
                        $compile(elem.contents())(scope);
                    });
                 });
