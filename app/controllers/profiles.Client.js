@@ -16,7 +16,7 @@
            templateUrl: '/public/profileBox.html'
        } 
     })
-    .directive("addBookOne", ['$http', function($http){
+    .directive("addBookOne", ['$http', '$compile', function($http, $compile){
         return {
             restrict: 'E',
             templateUrl: "/public/addBooktemp.html",
@@ -28,6 +28,10 @@
                    var y = elem.find("#author").val();
                    $http.get('https://www.googleapis.com/books/v1/volumes?q=' + x + '+inauthor:' + y).then(function(result){
                        console.log(result);
+                       scope.books = result.data.items;
+                       console.log(scope.books);
+                       elem.html("<div><ul><li ng-repeat='book in books'>{{book.volumeInfo.title}}</li></ul></div>");
+                       $compile(elem.contents())(scope);
                    });
                 });
             }
