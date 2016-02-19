@@ -14,10 +14,20 @@ li {
 
 .bkinfo {
     display: block;
-    width: 120px;
-    height: 30px;
+    width: 100px;
+    height: 60px;
     background-color: rgba(255,0,0,0.5);
     text-overflow: ellipsis;  
     white-space: nowrap;
     overflow: hidden;
+}
+
+.ulcntr {
+    background-color: gray;
+    width: 1400px;
+    
+}
+
+add-book-one {
+    background-color: gray;
 }

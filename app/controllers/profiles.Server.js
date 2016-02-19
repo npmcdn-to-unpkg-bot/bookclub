@@ -20,4 +20,19 @@ module.exports = function(){
         });
     };
     
+    this.createBook = function(req, res){
+      User.findById(req.user.id, function(err, result){
+          if(err){console.log(err);}
+          if(result){
+              result.books.push({
+                 title: req.query.title,
+                 author: req.query.author,
+                 tags: req.query.tags,
+                 cover: req.query.cover
+              });
+              
+              result.save(function(err){if(err){console.log(err);}});
+          }
+      })  
+    };
 };

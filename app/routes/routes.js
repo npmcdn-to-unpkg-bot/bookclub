@@ -32,6 +32,11 @@ module.exports = function(app, passport){
     app.route('/my')
     .get(isLoggedIn, pSjsI.myProfile);
     
+    app.route('/addbook')
+    .get(isLoggedIn, function(req, res){
+        res.json({title: req.query.title, authors: req.query.author.split(","), tags: req.query.tags.split(","), cover: decodeURIComponent(req.query.cover)});
+    });
+    
     app.route('/auth/facebook')
     .get(passport.authenticate('facebook'));
     
