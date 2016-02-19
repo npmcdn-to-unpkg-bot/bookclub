@@ -26,13 +26,15 @@ module.exports = function(){
           if(result){
               result.books.push({
                  title: req.query.title,
-                 author: req.query.author,
-                 tags: req.query.tags,
+                 authors: req.query.author.split(","),
+                 tags: req.query.tags.split(","),
                  cover: req.query.cover
               });
               
-              result.save(function(err){if(err){console.log(err);}});
+              console.log(result);
+              result.save(function(err){if(err){console.log(err);} res.redirect('/my');});
+              
           }
-      })  
+      });
     };
 };
