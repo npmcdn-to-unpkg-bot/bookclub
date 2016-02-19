@@ -32,7 +32,7 @@ module.exports = function(){
               });
               
               console.log(result);
-              result.save(function(err){if(err){console.log(err);} res.redirect('/my');});
+              result.save(function(err){if(err){console.log(err);} res.redirect('/profile');});
               
           }
       });

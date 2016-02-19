@@ -18,8 +18,8 @@ li {
     height: 60px;
     background-color: rgba(255,0,0,0.5);
     text-overflow: ellipsis;  
-    white-space: nowrap;
-    overflow: hidden;
+    white-space: normal;
+    overflow: auto;
 }
 
 .ulcntr {
@@ -30,4 +30,8 @@ li {
 
 add-book-one {
     background-color: gray;
+}
+
+.bklnks {
+    text-decoration: none;
 }
