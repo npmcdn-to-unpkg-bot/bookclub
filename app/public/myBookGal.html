@@ -1,3 +1,4 @@
+<div class="btn-group sbtns"><button sort-by="title">Title</button><button sort-by="authors">Authors</button><button sort-by="tags">Tags</button></div>
 <div class="grid">
     <div class="grid-item text-center" ng-repeat="mybook in mybooks">
         <div class="titles">
@@ -9,6 +10,9 @@
         <div class="authors">
             {{mybook.authors.join(", ")}}
             </div>
+        <div class="tags">
+            {{mybook.tags.join(", ")}}
+        </div>
             <a class="btn" ng-href='/rmvbk?t={{mybook.title}}'>Remove</a>
     </div>
 </div>
@@ -18,10 +22,16 @@
     grid.isotope({
       getSortData: {
         title: '.titles',
-        authors: '.authors'
+        authors: '.authors',
+        tags: '.tags'
       },
       itemSelector: '.grid-item',
       layoutMode: 'fitRows'
     });
+});
+
+$('.sbtns').on( 'click', 'button', function() {
+  var sortByValue = $(this).attr('sort-by');
+  grid.isotope({ sortBy: sortByValue });
 });
 </script>
