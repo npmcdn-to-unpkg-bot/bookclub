@@ -14,5 +14,10 @@ li {
 
 .bkinfo {
     display: block;
-    width: 100px;
+    width: 120px;
+    height: 30px;
+    background-color: rgba(255,0,0,0.5);
+    text-overflow: ellipsis;  
+    white-space: nowrap;
+    overflow: hidden;
 }
