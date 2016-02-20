@@ -30,6 +30,8 @@
     });
 });
 
+setTimeout(function() {grid.isotope('layout')}, 500);
+
 $('.sbtns').on( 'click', 'button', function() {
   var sortByValue = $(this).attr('sort-by');
   grid.isotope({ sortBy: sortByValue });

@@ -6,7 +6,7 @@
     .filter('encodeURIComponent', function() {
     return window.encodeURIComponent;})
     .controller("proInfo", ["$scope", "$http", "$location", function($scope, $http, $location){
-        if(!angular.isNumber($location.absUrl().split('/')[4])){
+        if(isNaN($location.absUrl().split('/')[4])){
             $http.get('/my').then(function(result){
           console.log(result);
           $scope.myname = result.data.name;
@@ -59,6 +59,12 @@
         return {
             restrict: "E",
             templateUrl: "/public/theirBookGal.html"
+        }
+    })
+    .directive("navBar", function(){
+        return {
+            restrict: "E",
+            templateUrl: "/public/navbar.html"
         }
     })
     
