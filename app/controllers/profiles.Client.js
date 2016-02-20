@@ -5,14 +5,23 @@
     angular.module("profile", [])
     .filter('encodeURIComponent', function() {
     return window.encodeURIComponent;})
-    .controller("proInfo", ["$scope", "$http", function($scope, $http){
-       $http.get('/my').then(function(result){
+    .controller("proInfo", ["$scope", "$http", "$location", function($scope, $http, $location){
+        if(!angular.isNumber($location.absUrl().split('/')[4])){
+            $http.get('/my').then(function(result){
           console.log(result);
           $scope.myname = result.data.name;
           $scope.mypic = result.data.pic;
           $scope.mybooks = result.data.books;
        });
-       
+        } else {
+            $http.get('/th/' + $location.absUrl().split('/')[4]).then(function(result){
+               console.log(result);
+            $scope.myname = result.data.name;
+            $scope.mypic = result.data.pic;
+            $scope.mybooks = result.data.books;
+            });
+
+        }
     }])
     .directive("profileBox", function(){
        return {
@@ -45,6 +54,12 @@
             restrict: "E",
             templateUrl: "/public/myBookGal.html",
         };
-    });
+    })
+    .directive("theirBookGal", function(){
+        return {
+            restrict: "E",
+            templateUrl: "/public/theirBookGal.html"
+        }
+    })
     
 })();

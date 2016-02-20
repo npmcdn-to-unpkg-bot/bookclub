@@ -32,6 +32,18 @@ module.exports = function(app, passport){
     app.route('/my')
     .get(isLoggedIn, pSjsI.myProfile);
     
+    app.route('/th/:theirid')
+    .get(pSjsI.theirProfile);
+    
+    app.route('/profile/:theirid')
+    .get(function(req, res) {
+        if(req.user != null && req.params.theirid == req.user.id){
+            res.redirect('/profile');
+        } else {
+        res.sendFile(p + '/public/theirProfile.html');
+        }
+    });
+    
     app.route('/addbook')
     .get(isLoggedIn, pSjsI.createBook);
     
