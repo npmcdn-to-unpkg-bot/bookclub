@@ -35,6 +35,9 @@ module.exports = function(app, passport){
     app.route('/addbook')
     .get(isLoggedIn, pSjsI.createBook);
     
+    app.route('/rmvbk')
+    .get(isLoggedIn, pSjsI.rmvBook);
+    
     app.route('/auth/facebook')
     .get(passport.authenticate('facebook'));
     

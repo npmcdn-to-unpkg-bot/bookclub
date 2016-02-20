@@ -37,4 +37,15 @@ module.exports = function(){
           }
       });
     };
+    
+    this.rmvBook = function(req, res){
+        User.findById(req.user.id, function(err, result) {
+            if(err){console.log(err);}
+            if(result){
+                var x = result.books.splice(result.books.findIndex(function(curr){return curr==req.query.t;}),1);
+                //console.log(x + " was removed from user " + result.name + "\n");
+                result.save(function(err){if(err){console.log(err);} res.redirect('/profile');});
+            }
+        })
+    }
 };
