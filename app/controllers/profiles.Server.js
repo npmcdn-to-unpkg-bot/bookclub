@@ -67,7 +67,7 @@ module.exports = function(){
         User.distinct("books.title").then(function(result){
            console.log(result);
            res.send(result);
-        }, function(err){res.send(err);});
+        }, function(err){res.json({'err': err});});
     };
     
     this.owners = function(req, res){
@@ -75,5 +75,12 @@ module.exports = function(){
         User.find({'books.title': q}).then(function(result){
             res.json({'owners': result});
         }, function(err){res.json({'err': err});});
+    };
+    
+    this.getBookData = function(req, res){
+        var q = req.query.t;
+        User.findOne({'books.title': q}, {'books.$': 1}).then(function(result){
+            res.json(result);
+        }, function(err){if(err){res.json({"err": err});}});
     };
 };
