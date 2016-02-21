@@ -65,7 +65,6 @@ module.exports = function(){
     
     this.getAll = function(req, res){
         User.distinct("books.title").then(function(result){
-           console.log(result);
            res.send(result);
         }, function(err){res.json({'err': err});});
     };
@@ -80,7 +79,7 @@ module.exports = function(){
     this.getBookData = function(req, res){
         var q = req.query.t;
         User.findOne({'books.title': q}, {'books.$': 1}).then(function(result){
-            res.json(result);
+            res.json({authors: result.books[0].authors, tags: result.books[0].tags, cover: result.books[0].cover, title: result.books[0].title});
         }, function(err){if(err){res.json({"err": err});}});
     };
 };
