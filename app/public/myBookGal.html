@@ -30,7 +30,8 @@
     });
 });
 
-setTimeout(function() {grid.isotope('layout')}, 500);
+setTimeout(function() {grid.isotope('reloadItems')}, 500);
+setTimeout(function() {grid.isotope('reloadItems')}, 1000);
 
 $('.sbtns').on( 'click', 'button', function() {
   var sortByValue = $(this).attr('sort-by');

@@ -19,8 +19,8 @@
     .directive("bookGrid", function(){
        return {
            restrict: "E",
-           templateUrl: '/public/myBookGal.html'
-       } 
+           templateUrl: '/public/allBookGal.html',
+       };
     });
     
 })();

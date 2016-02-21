@@ -18,8 +18,10 @@
 </div>
 
 <script type="text/javascript">
+
+/*
  var grid = $('.grid').imagesLoaded(function(){
-    grid.isotope({
+     grid.isotope({
       getSortData: {
         title: '.titles',
         authors: '.authors',
@@ -28,12 +30,31 @@
       itemSelector: '.grid-item',
       layoutMode: 'fitRows'
     });
-});
-
-setTimeout(function() {grid.isotope('layout')}, 500);
-
+ });
+*/ 
+setTimeout(function(){
+ var grid = $('.grid').isotope({
+      getSortData: {
+        title: '.titles',
+        authors: '.authors',
+        tags: '.tags'
+      },
+      itemSelector: '.grid-item',
+      layoutMode: 'masonry'
+    });
+    
 $('.sbtns').on( 'click', 'button', function() {
   var sortByValue = $(this).attr('sort-by');
   grid.isotope({ sortBy: sortByValue });
 });
+},500);
+/*   
+    grid.imagesLoaded().progress( function() {
+    grid.isotope('layout');
+    });
+
+setTimeout(function() {console.log("Done"); grid.isotope('reloadItems');}, 2000);
+setTimeout(function() {console.log("One"); grid.isotope('reloadItems')}, 3000);
+*/
+
 </script>
