@@ -7,6 +7,8 @@ var User = new Schema({
    _id: Number,
    name: String,
    pic: String,
+   city: String,
+   state: String,
    books: [{
        title: String,
        cover: String,

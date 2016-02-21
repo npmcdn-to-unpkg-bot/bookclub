@@ -48,4 +48,8 @@ module.exports = function(){
             }
         })
     }
+    
+    this.editProfile = function(req, res){
+        //get POST data with name, city, and state changes.
+    }
 };

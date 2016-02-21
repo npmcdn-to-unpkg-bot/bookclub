@@ -12,6 +12,8 @@
           $scope.myname = result.data.name;
           $scope.mypic = result.data.pic;
           $scope.mybooks = result.data.books;
+          $scope.mycity = result.data.city;
+          $scope.mystate = result.data.state;
        });
         } else {
             $http.get('/th/' + $location.absUrl().split('/')[4]).then(function(result){
