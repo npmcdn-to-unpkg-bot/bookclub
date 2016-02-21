@@ -51,5 +51,15 @@ module.exports = function(){
     
     this.editProfile = function(req, res){
         //get POST data with name, city, and state changes.
-    }
+        User.findById(req.user.id, function(err, result){
+            if(err){res.send("There was an error");}
+            if(result){
+                result.name = req.body.name;
+                result.city = req.body.city;
+                result.state = req.body.state;
+                
+                result.save(function(err){if(err){res.send(err);} res.redirect('/settings#success');});
+            }
+        });
+    };
 };

@@ -5,7 +5,7 @@ var routes = require("./app/routes/routes.js");
 var mongoose = require("mongoose");
 var passport = require("passport");
 var session = require("express-session");
-
+var bodyParser = require("body-parser");
 
 require('dotenv').load();
 require("./app/config/passport.js")(passport);
@@ -20,7 +20,9 @@ app.use(session({
   secret: 'JohnHancock',
   resave: false,
   saveUninitialized: true
-}))
+}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true})); 
 
 app.use(passport.initialize());
 app.use(passport.session());

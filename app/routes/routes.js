@@ -29,6 +29,11 @@ module.exports = function(app, passport){
         res.sendFile(p + '/public/login.html');
     });
     
+    app.route('/settings')
+    .get(isLoggedIn, function(req, res){
+        res.sendFile(p + '/public/settings.html');
+    });
+    
     app.route('/my')
     .get(isLoggedIn, pSjsI.myProfile);
     
@@ -43,6 +48,9 @@ module.exports = function(app, passport){
         res.sendFile(p + '/public/theirProfile.html');
         }
     });
+    
+    app.route('/changemy')
+    .post(pSjsI.editProfile);
     
     app.route('/addbook')
     .get(isLoggedIn, pSjsI.createBook);
