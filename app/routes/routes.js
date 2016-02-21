@@ -65,6 +65,14 @@ module.exports = function(app, passport){
     .get(passport.authenticate('facebook', {
         successRedirect: '/profile',
         failureRedirect: '/login'
-    }))
+    }));
+    
+    //Books API begins here.
+    
+    app.route('/booksapi/getall')
+    .get(pSjsI.getAll);
+    
+    app.route('/booksapi/whoownsme')
+    .get(pSjsI.owners);
     
 }

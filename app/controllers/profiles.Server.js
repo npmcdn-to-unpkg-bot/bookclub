@@ -62,4 +62,18 @@ module.exports = function(){
             }
         });
     };
+    
+    this.getAll = function(req, res){
+        User.distinct("books.title").then(function(result){
+           console.log(result);
+           res.send(result);
+        }, function(err){res.send(err);});
+    };
+    
+    this.owners = function(req, res){
+        var q = req.query.t;
+        User.find({'books.title': q}).then(function(result){
+            res.json({'owners': result});
+        }, function(err){res.json({'err': err});});
+    };
 };
