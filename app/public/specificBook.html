@@ -12,5 +12,9 @@
     </head>
     <body>
         <div class="jumbotron"><h1>{{title}}</h1><br><h3>By: {{authors.join(", ")}}</h3></div>
+        <div>
+            <img ng-src='{{cover}}'>
+            Tags: {{tags.join(", ")}}
+        </div>
     </body>
 </html>

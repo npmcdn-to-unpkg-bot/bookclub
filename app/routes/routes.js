@@ -34,6 +34,11 @@ module.exports = function(app, passport){
        res.sendFile(p + '/public/browse.html');
     });
     
+    app.route('/book/:booktitle')
+    .get(function(req, res){
+        res.sendFile(p + '/public/specificBook.html');
+    });
+    
     app.route('/settings')
     .get(isLoggedIn, function(req, res){
         res.sendFile(p + '/public/settings.html');
