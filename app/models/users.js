@@ -15,9 +15,9 @@ var User = new Schema({
        authors: [String],
        tags: [String],
        onLoan: Boolean,
-       onLoanTo: String,
+       onLoanTo: Number,
        requested: Boolean,
-       requestedBy: String
+       requestedBy: Number
    }]
 });
 

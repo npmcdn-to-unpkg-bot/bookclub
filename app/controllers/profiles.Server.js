@@ -28,7 +28,11 @@ module.exports = function(){
                  title: req.query.title,
                  authors: req.query.author.split(","),
                  tags: req.query.tags.split(","),
-                 cover: req.query.cover
+                 cover: req.query.cover,
+                 onLoan: false,
+                 onLoanTo: null,
+                 requested: false,
+                 requestedBy: null
               });
               
               console.log(result);
@@ -77,9 +81,18 @@ module.exports = function(){
     };
     
     this.getBookData = function(req, res){
-        var q = req.query.t;
+        var q = decodeURIComponent(req.query.t);
         User.findOne({'books.title': q}, {'books.$': 1}).then(function(result){
-            res.json({authors: result.books[0].authors, tags: result.books[0].tags, cover: result.books[0].cover, title: result.books[0].title});
+            res.json({
+                authors: result.books[0].authors,
+                tags: result.books[0].tags,
+                cover: result.books[0].cover,
+                title: result.books[0].title,
+               onLoan: result.books[0].onLoan,
+               onLoanTo: result.books[0].onLoanTo,
+               requested: result.books[0].requested,
+               requestedBy: result.books[0].requestedBy
+            });
         }, function(err){if(err){res.json({"err": err});}});
     };
     
@@ -89,6 +102,9 @@ module.exports = function(){
       var u = req.query.u;
       
       User.findOne({'name': u, 'books.title': t}).then(function(result){
+          if(result._id == req.user.id){res.json({err: "You can't request a book from yourself!"});}
+          //result.books[0].requested = true;
+          //result.books[0].requestedBy = req.user.id;
           res.json(result);
       });
       
