@@ -13,7 +13,11 @@ var User = new Schema({
        title: String,
        cover: String,
        authors: [String],
-       tags: [String]
+       tags: [String],
+       onLoan: Boolean,
+       onLoanTo: String,
+       requested: Boolean,
+       requestedBy: String
    }]
 });
 

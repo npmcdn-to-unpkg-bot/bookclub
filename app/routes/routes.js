@@ -63,6 +63,9 @@ module.exports = function(app, passport){
     app.route('/rmvbk')
     .get(isLoggedIn, pSjsI.rmvBook);
     
+    app.route('/rqstbk')
+    .get(isLoggedIn, pSjsI.rqstBook);
+    
     app.route('/auth/facebook')
     .get(passport.authenticate('facebook'));
     
@@ -83,4 +86,4 @@ module.exports = function(app, passport){
     app.route('/booksapi/getbook')
     .get(pSjsI.getBookData);
     
-}
+};

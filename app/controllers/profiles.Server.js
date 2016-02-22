@@ -82,4 +82,15 @@ module.exports = function(){
             res.json({authors: result.books[0].authors, tags: result.books[0].tags, cover: result.books[0].cover, title: result.books[0].title});
         }, function(err){if(err){res.json({"err": err});}});
     };
+    
+    this.rqstBook = function(req, res){
+      //Request t book from u user.
+      var t = req.query.t;
+      var u = req.query.u;
+      
+      User.findOne({'name': u, 'books.title': t}).then(function(result){
+          res.json(result);
+      });
+      
+    };
 };
