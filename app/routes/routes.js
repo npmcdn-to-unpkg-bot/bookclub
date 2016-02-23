@@ -45,6 +45,14 @@ module.exports = function(app, passport){
         res.sendFile(p + '/public/settings.html');
     });
     
+    app.route('/myRequests')
+    .get(isLoggedIn, function(req, res){
+        res.sendFile(p + "/public/myRequests.html");
+    });
+    
+    app.route('/myReqs')
+    .get(isLoggedIn, pSjsI.myReqs);
+    
     app.route('/my')
     .get(isLoggedIn, pSjsI.myProfile);
     

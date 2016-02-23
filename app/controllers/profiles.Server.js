@@ -114,4 +114,21 @@ module.exports = function(){
       }, function(err){res.json({err: err});});
       
     };
+    
+    this.myReqs = function(req, res){
+        User.findById(req.user.id).then(function(result){
+            var rArr = [];
+            var lArr = [];
+            result.books.forEach(function(curr){
+                if(curr.requested == true && curr.onLoan == false){
+                    rArr.push({title: curr.title, requestedBy: curr.requestedBy});
+                } else {
+                    if(curr.onLoan){
+                        lArr.push({title: curr.title, onLoanTo: curr.onLoanTo});
+                    }
+                }
+            });
+            res.json({requests: rArr, loans: lArr});
+        });
+    };
 };
