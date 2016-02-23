@@ -107,9 +107,9 @@ module.exports = function(){
              return curr.title == t; 
           });
           result.books[x].requested = true;
-          if(result.books[x].requestedBy == null){result.books[x].requestedBy = [];}
+          if(result.books[x].requestedBy == null){result.books[x].requestedBy = [];} else {
           if(result.books[x].requestedBy.includes(req.user.id)){res.json({err: "You've already requested this book!"});}
-          else{result.books[x].requestedBy.push(req.user.id);}
+          else{result.books[x].requestedBy.push(req.user.id);}}
           result.save(function(err){if(err){res.json({err: err});} res.json({success: "You requested the book: " + result.books[x].title + "!"});});
       }, function(err){res.json({err: err});});
       

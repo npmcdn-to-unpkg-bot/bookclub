@@ -7,6 +7,7 @@ module.exports = function(app, passport){
     var pSjsI = new pSjs();
  
     function isLoggedIn(req, res, next){
+        req.session.redirect_url = req.originalUrl;
         if(req.isAuthenticated()){
             return next();
         } else {
@@ -81,9 +82,10 @@ module.exports = function(app, passport){
     
     app.route('/auth/facebook/callback')
     .get(passport.authenticate('facebook', {
-        successRedirect: '/profile',
         failureRedirect: '/login'
-    }));
+    }), function(req, res){
+        if(req.session.redirect_url){res.redirect(req.session.redirect_url);} else {res.redirect('/profile');}
+    });
     
     //Books API begins here.
     
