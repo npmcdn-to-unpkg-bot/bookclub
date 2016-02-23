@@ -47,6 +47,11 @@ module.exports = function(app, passport){
     app.route('/my')
     .get(isLoggedIn, pSjsI.myProfile);
     
+    app.route('/myid')
+    .get(isLoggedIn, function(req, res) {
+        res.json({myid: req.user.id});
+    });
+    
     app.route('/th/:theirid')
     .get(pSjsI.theirProfile);
     

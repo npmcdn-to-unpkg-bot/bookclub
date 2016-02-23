@@ -17,7 +17,8 @@
             Tags: {{tags.join(", ")}}
             <br>
             <div ng-repeat="books in booksArr">
-                Name: {{books.ownerName}} - Status: {{books.onLoan?'On Loan':'Available'}} - <a ng-show='{{!books.onLoad}}' ng-href='/rqstbk?t={{books.utitle}}&u={{books.owner}}'>Request Book</a>
+                Name: {{books.ownerName}} - Status: {{books.onLoan?'On Loan':'Available'}} - <a ng-show='{{!books.onLoan && !books.requestedBy.includes(myid)}}' ng-href='/rqstbk?t={{books.utitle}}&u={{books.owner}}'>Request Book</a>
+        <br><span id="testing">{{books.ownerName}} -- {{books.requestedBy.includes(myid)}} -- {{books.requestedBy.join()}} -- {{myid}}</span>
             </div>
         </div>
     </body>

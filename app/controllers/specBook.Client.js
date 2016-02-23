@@ -4,6 +4,11 @@
     
     angular.module('oneBook', [])
     .controller('oB', ["$scope", "$http", "$location", function($scope, $http, $location){
+        $http.get('/myid').then(function(result){
+            console.log(result.data.myid);
+            $scope.myid = Number.parseInt(result.data.myid);
+            console.log(typeof $scope.myid);
+        });
         $http.get('/booksapi/getbook?t=' + encodeURIComponent($location.absUrl().split('book/')[1])).then(function(result){
             console.log(result);
             $scope.title = result.data.title;
@@ -23,13 +28,14 @@
                     ownerName: curr.name,
                     title: currentBook.title,
                     utitle: encodeURIComponent(currentBook.title),
-                    onLoan: currentBook.onLoan
+                    onLoan: currentBook.onLoan,
+                    requestedBy: currentBook.requestedBy
                   });
                 }
                });
            });
            console.log($scope.booksArr);
         });
-    }])
+    }]);
     
 })();

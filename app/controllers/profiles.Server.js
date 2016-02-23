@@ -30,9 +30,9 @@ module.exports = function(){
                  tags: req.query.tags.split(","),
                  cover: req.query.cover,
                  onLoan: false,
-                 onLoanTo: null,
+                 onLoanTo: [],
                  requested: false,
-                 requestedBy: null
+                 requestedBy: []
               });
               
               console.log(result);
@@ -103,9 +103,14 @@ module.exports = function(){
       var u = decodeURIComponent(req.query.u);
       if(u == req.user.id){res.json({err: "You can't request a book from yourself!"});}
       User.findOne({'_id': u, 'books.title': t}).then(function(result){
-          result.books[0].requested = true;
-          result.books[0].requestedBy.push(req.user.id);
-          result.save(function(err){if(err){res.json({err: err});} res.json({success: "You requested the book!"});});
+          var x = result.books.findIndex(function(curr){
+             return curr.title == t; 
+          });
+          result.books[x].requested = true;
+          if(result.books[x].requestedBy == null){result.books[x].requestedBy = [];}
+          if(result.books[x].requestedBy.includes(req.user.id)){res.json({err: "You've already requested this book!"});}
+          else{result.books[x].requestedBy.push(req.user.id);}
+          result.save(function(err){if(err){res.json({err: err});} res.json({success: "You requested the book: " + result.books[x].title + "!"});});
       }, function(err){res.json({err: err});});
       
     };
