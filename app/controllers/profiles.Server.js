@@ -74,7 +74,7 @@ module.exports = function(){
     };
     
     this.owners = function(req, res){
-        var q = req.query.t;
+        var q = decodeURIComponent(req.query.t);
         User.find({'books.title': q}).then(function(result){
             res.json({'owners': result});
         }, function(err){res.json({'err': err});});

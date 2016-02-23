@@ -15,7 +15,10 @@
         <div>
             <img ng-src='{{cover}}'>
             Tags: {{tags.join(", ")}}
-            <a ng-href='/rqstbk?t={{title}}'>Request Book</a>
+            <br>
+            <div ng-repeat="books in booksArr">
+                Name: {{books.ownerName}} - Status: {{books.onLoan?'On Loan':'Available'}} - <a ng-show='{{!books.onLoad}}' ng-href='/rqstbk?t={{title}}&u={{books.owner}}'>Request Book</a>
+            </div>
         </div>
     </body>
 </html>
