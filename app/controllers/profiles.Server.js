@@ -97,16 +97,17 @@ module.exports = function(){
     };
     
     this.rqstBook = function(req, res){
+        console.log("Requested!");
       //Request t book from u user.
       var t = req.query.t;
       var u = req.query.u;
-      
-      User.findOne({'name': u, 'books.title': t}).then(function(result){
-          if(result._id == req.user.id){res.json({err: "You can't request a book from yourself!"});}
+      console.log(t + " " + u);
+      if(u == req.user.id){res.json({err: "You can't request a book from yourself!"});}
+      User.findOne({'_id': u, 'books.title': t}).then(function(result){
           //result.books[0].requested = true;
           //result.books[0].requestedBy = req.user.id;
           res.json(result);
-      });
+      }, function(err){res.json({err: err});});
       
     };
 };
