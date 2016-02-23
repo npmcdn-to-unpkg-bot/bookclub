@@ -19,9 +19,10 @@
                angular.forEach(curr.books, function(currentBook){
                 if(currentBook.title==decodeURIComponent($location.absUrl().split('book/')[1])){
                   $scope.booksArr.push({
-                    owner: curr._id,
+                    owner: encodeURIComponent(curr._id),
                     ownerName: curr.name,
                     title: currentBook.title,
+                    utitle: encodeURIComponent(currentBook.title),
                     onLoan: currentBook.onLoan
                   });
                 }
