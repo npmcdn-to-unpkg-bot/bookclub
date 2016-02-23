@@ -17,7 +17,7 @@ var User = new Schema({
        onLoan: Boolean,
        onLoanTo: Number,
        requested: Boolean,
-       requestedBy: Number
+       requestedBy: [Number]
    }]
 });
 

@@ -104,7 +104,7 @@ module.exports = function(){
       if(u == req.user.id){res.json({err: "You can't request a book from yourself!"});}
       User.findOne({'_id': u, 'books.title': t}).then(function(result){
           result.books[0].requested = true;
-          result.books[0].requestedBy = req.user.id;
+          result.books[0].requestedBy.push(req.user.id);
           result.save(function(err){if(err){res.json({err: err});} res.json({success: "You requested the book!"});});
       }, function(err){res.json({err: err});});
       
