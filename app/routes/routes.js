@@ -66,10 +66,16 @@ module.exports = function(app, passport){
     
     app.route('/profile/:theirid')
     .get(function(req, res) {
+        var theirid = null;
+        theirid = req.params.theirid;
         if(req.user != null && req.params.theirid == req.user.id){
             res.redirect('/profile');
         } else {
-        res.sendFile(p + '/public/theirProfile.html');
+            if(theirid){
+                res.redirect('/profile');
+            } else {
+                res.sendFile(p + '/public/theirProfile.html');
+            }
         }
     });
     
@@ -92,7 +98,7 @@ module.exports = function(app, passport){
     .get(passport.authenticate('facebook', {
         failureRedirect: '/login'
     }), function(req, res){
-        if(req.session.redirect_url){res.redirect(req.session.redirect_url);} else {res.redirect('/profile');}
+        if(req.session.redirect_url){res.redirect(req.session.redirect_url); delete req.session.redirect_url;} else {res.redirect('/profile');}
     });
     
     //Books API begins here.

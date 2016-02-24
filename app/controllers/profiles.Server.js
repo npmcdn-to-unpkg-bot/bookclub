@@ -30,9 +30,9 @@ module.exports = function(){
                  tags: req.query.tags.split(","),
                  cover: req.query.cover,
                  onLoan: false,
-                 onLoanTo: [],
+                 //onLoanTo: [],
                  requested: false,
-                 requestedBy: []
+                 //requestedBy: []
               });
               
               console.log(result);
@@ -102,15 +102,31 @@ module.exports = function(){
       var t = decodeURIComponent(req.query.t);
       var u = decodeURIComponent(req.query.u);
       if(u == req.user.id){res.json({err: "You can't request a book from yourself!"});}
+      
       User.findOne({'_id': u, 'books.title': t}).then(function(result){
           var x = result.books.findIndex(function(curr){
              return curr.title == t; 
           });
           result.books[x].requested = true;
-          if(result.books[x].requestedBy == null){result.books[x].requestedBy = [];} else {
-          if(result.books[x].requestedBy.includes(req.user.id)){res.json({err: "You've already requested this book!"});}
-          else{result.books[x].requestedBy.push(req.user.id);}}
-          result.save(function(err){if(err){res.json({err: err});} res.json({success: "You requested the book: " + result.books[x].title + "!"});});
+          
+          if(result.books[x].requestedBy == null){
+              console.log("Break 1");
+              result.books[x].requestedBy = [];
+          } 
+          else {
+              console.log("BReak 1.5");
+              console.log(result.books[x].requestedBy);
+              console.log(req.user.id);
+                if(result.books[x].requestedBy.indexOf(req.user.id)!= -1){
+                    console.log("Break 2");
+                    res.json({err: "You've already requested this book!"});
+                }
+                else {
+                    console.log("Break 3");
+                    result.books[x].requestedBy.push(req.user.id);
+                  result.save(function(err){if(err){res.json({err: err});} console.log(result.books[x]); res.json({success: "You requested the book: " + result.books[x].title + "!"});});
+                }
+          }
       }, function(err){res.json({err: err});});
       
     };
@@ -120,6 +136,7 @@ module.exports = function(){
             var rArr = [];
             var lArr = [];
             result.books.forEach(function(curr){
+                console.log("\n" + curr.title + " -- " + curr.requested + " -- " + curr.onLoan + "\n");
                 if(curr.requested == true && curr.onLoan == false){
                     rArr.push({title: curr.title, requestedBy: curr.requestedBy});
                 } else {
