@@ -18,23 +18,20 @@
 </div>
 
 <script type="text/javascript">
- var grid = $('.grid').imagesLoaded(function(){
-    grid.isotope({
+setTimeout(function(){
+ var grid = $('.grid').isotope({
       getSortData: {
         title: '.titles',
         authors: '.authors',
         tags: '.tags'
       },
       itemSelector: '.grid-item',
-      layoutMode: 'fitRows'
+      layoutMode: 'masonry'
     });
-});
-
-setTimeout(function() {grid.isotope('reloadItems')}, 500);
-setTimeout(function() {grid.isotope('reloadItems')}, 1000);
-
+    
 $('.sbtns').on( 'click', 'button', function() {
   var sortByValue = $(this).attr('sort-by');
   grid.isotope({ sortBy: sortByValue });
 });
+},500);
 </script>
