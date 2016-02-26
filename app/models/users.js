@@ -15,7 +15,7 @@ var User = new Schema({
        authors: [String],
        tags: [String],
        onLoan: Boolean,
-       onLoanTo: Number,
+       onLoanTo: [{uid: Number, uname: String}],
        requested: Boolean,
        requestedBy: [{uid: Number, uname: String}]
    }]
