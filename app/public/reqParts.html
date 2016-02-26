@@ -8,7 +8,7 @@
         <td>{{req.requestedBy[0].uname}}</td>
         <td>{{req.title}}</td>
         <td>{{req.requestedBy.length - 1}}</td>
-        <td><a ng-href='/approve?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Approve</a> <br> Deny</td>
+        <td><a ng-href='/approve?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Approve</a> <br> <a ng-href='/deny?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Deny</a></td>
     </tr>
 </table>
 

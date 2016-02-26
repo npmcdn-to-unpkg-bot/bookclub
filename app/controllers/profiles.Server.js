@@ -166,21 +166,17 @@ module.exports = function(){
            if(result.books[x].requestedBy[0].uid == req.query.uid){
                result.books[x].onLoanTo = result.books[x].requestedBy.shift();
                result.books[x].onLoan = true;
-               console.log("If one");
                if(result.books[x].requestedBy.length > 0){
                    result.books[x].requested = true;
                    result.save(function(err){if(err){res.json({err: err});} else {
                    res.json({success: "The book is ready to loan."});}});
-                   console.log("if two");
                } else {
                    result.books[x].requested = false;
                    result.save(function(err){if(err){res.json({err: err});} else {
                    res.json({success: "The book is ready to loan."});}});
-                   console.log("else 2");
                }
            } else {
                res.json({err: "This request is invalid."});
-               console.log("else 1");
            }
            
         
@@ -190,15 +186,23 @@ module.exports = function(){
     this.deny = function(req, res){
         User.findById(req.user.id).then(function(result){
            var x = result.books.findIndex(function(curr){
-              result.query.title == curr.title; 
+              return req.query.title == curr.title; 
            });
            
-           if(result.book[x].requestedBy[0] == req.query.uid){
+           if(result.books[x].requestedBy[0].uid == req.query.uid){
                result.books[x].requestedBy.shift();
                if(result.books[x].requestedBy.length > 0){
                    result.books[x].requested = true;
+                   
+                   result.save(function(err){
+                       if(err){res.json({err: err});} 
+                       else {res.json({success: "The book request was denied."});}});
                } else {
                    result.books[x].requested = false;
+                   
+                   result.save(function(err){
+                       if(err){res.json({err: err});} 
+                       else {res.json({success: "The book request was denied."});}});
                }
            } else {
                res.json({err: "This request is invalid"});
