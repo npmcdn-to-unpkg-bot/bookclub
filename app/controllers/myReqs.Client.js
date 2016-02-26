@@ -9,4 +9,10 @@
            $scope.loans = result.data.loans;
         });
     }])
+    .directive("reqParts", ["$http", function($http){
+       return {
+           restrict: 'E',
+           templateUrl: '/public/reqParts.html'
+       };
+    }]);
 })();

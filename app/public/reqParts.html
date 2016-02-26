@@ -2,11 +2,13 @@
     <tr>
         <th>User</th>
         <th>Title</th>
+        <th>Waiting List</th>
     </tr>
     <tr ng-repeat="req in requests">
-        <td>{{user}}</td>
+        <td>{{req.requestedBy[0].uname}}</td>
         <td>{{req.title}}</td>
-        <td>Approve</td>
+        <td>{{req.requestedBy.length - 1}}</td>
+        <td><a ng-href='/approve?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Approve</a> <br> Deny</td>
     </tr>
 </table>
 

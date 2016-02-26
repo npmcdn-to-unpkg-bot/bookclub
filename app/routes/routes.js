@@ -112,4 +112,7 @@ module.exports = function(app, passport){
     app.route('/booksapi/getbook')
     .get(pSjsI.getBookData);
     
+    app.route('/booksapi/uname/:uname')
+    .get(pSjsI.getUname);
+    
 };

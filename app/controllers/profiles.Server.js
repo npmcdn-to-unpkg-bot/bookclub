@@ -123,7 +123,7 @@ module.exports = function(){
                 }
                 else {
                     console.log("Break 3");
-                    result.books[x].requestedBy.push(req.user.id);
+                    result.books[x].requestedBy.push({uid: req.user.id, uname: req.user.name});
                   result.save(function(err){if(err){res.json({err: err});} console.log(result.books[x]); res.json({success: "You requested the book: " + result.books[x].title + "!"});});
                 }
           }
@@ -136,7 +136,7 @@ module.exports = function(){
             var rArr = [];
             var lArr = [];
             result.books.forEach(function(curr){
-                console.log("\n" + curr.title + " -- " + curr.requested + " -- " + curr.onLoan + "\n");
+                //console.log("\n" + curr.title + " -- " + curr.requested + " -- " + curr.onLoan + "\n");
                 if(curr.requested == true && curr.onLoan == false){
                     rArr.push({title: curr.title, requestedBy: curr.requestedBy});
                 } else {
@@ -148,4 +148,50 @@ module.exports = function(){
             res.json({requests: rArr, loans: lArr});
         });
     };
+    
+    this.getUname = function(req, res){
+        User.findById(req.params.uname).then(function(result){
+           res.json({name: result.name});
+        });
+    };
+    
+    this.approve = function(req, res){
+        User.findById(req.user.id).then(function(result){
+           var x = result.books.findIndex(function(curr){
+              result.query.title == curr.title; 
+           });
+           
+           if(result.books[x].requestedBy[0] == req.query.uid){
+               result.books[x].onLoanTo = result.books[x].requestedBy.shift();
+               result.books[x].onLoan = true;
+               if(result.books[x].requestedBy.length > 0){
+                   result.books[x].requested = true;
+               } else {
+                   result.books[x].requested = false;
+               }
+           } else {
+               res.json({err: "This request is invalid."});
+           }
+        });
+    };
+    
+    this.deny = function(req, res){
+        User.findById(req.user.id).then(function(result){
+           var x = result.books.findIndex(function(curr){
+              result.query.title == curr.title; 
+           });
+           
+           if(result.book[x].requestedBy[0] == req.query.uid){
+               result.books[x].requestedBy.shift();
+               if(result.books[x].requestedBy.length > 0){
+                   result.books[x].requested = true;
+               } else {
+                   result.books[x].requested = false;
+               }
+           } else {
+               res.json({err: "This request is invalid"});
+           }
+        });
+    };
+    
 };
