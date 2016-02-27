@@ -15,20 +15,29 @@
            templateUrl: '/public/reqParts.html',
            link: function(scope, elem, attr){
                scope.$on("domain_done", function(something, domainElement, miniscope){
-                   domainElement.find('.approve').click(function(){
+                   domainElement.find('.deny').click(function(){
                        //Check see if changing the scope and compiling changes the view.
                        console.log(scope);
                        console.log(miniscope);
-                       var x = scope.requests.findIndex(function(curr){
-                           return curr.title == miniscope.req.title;});
-                           scope.requests[x].requestedBy.shift();
-                        if(scope.requests[x].requestedBy.length > 0){
-                            $compile(domainElement)(scope);
-                        } else {
-                            scope.requests.slice(x, 1);
-                            $compile(domainElement)(scope);
-                        }
-                       //$compile(domainElement)(miniscope);
+                       $http.get($(this).attr('ng-href')).then(function(result){
+                           if(result.data.success){console.log("Success"); console.log(result);
+                               var x = scope.requests.findIndex(function(curr){
+                                   return curr.title == miniscope.req.title;
+                               });
+                                   scope.requests[x].requestedBy.shift();
+                                if(scope.requests[x].requestedBy.length > 0){
+                                    console.log("Still logged?");
+                                    $compile(domainElement)(scope);
+                                } else {
+                                    console.log("Sliced?");
+                                    scope.requests.splice(x, 1);
+                                    console.log(scope.requests);
+                                    $compile(elem)(scope);
+                                }
+                           }
+                           else{console.log("Failed"); console.log(result);}
+                       });
+
                    });
                });
            }
