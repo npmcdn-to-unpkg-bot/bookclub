@@ -3,12 +3,13 @@
         <th>User</th>
         <th>Title</th>
         <th>Waiting List</th>
+        <th>Actions</th>
     </tr>
-    <tr ng-repeat="req in requests">
+    <tr on-repeat-done="domain_done" ng-repeat="req in requests">
         <td>{{req.requestedBy[0].uname}}</td>
         <td>{{req.title}}</td>
         <td>{{req.requestedBy.length - 1}}</td>
-        <td><a class='approve' ng-href='/approve?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Approve</a> <br> <a ng-href='/deny?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Deny</a></td>
+        <td class="what"><button class='approve' ng-attr-nhref='/approve?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Approve</button> <br> <a ng-href='/deny?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Deny</a></td>
     </tr>
 </table>
 

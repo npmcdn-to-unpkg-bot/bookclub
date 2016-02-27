@@ -14,6 +14,7 @@
           $scope.mybooks = result.data.books;
           $scope.mycity = result.data.city;
           $scope.mystate = result.data.state;
+          $scope.myid = result.data._id;
        });
         } else {
             $http.get('/th/' + $location.absUrl().split('/')[4]).then(function(result){
