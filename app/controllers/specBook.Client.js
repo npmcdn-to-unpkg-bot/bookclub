@@ -36,6 +36,12 @@
            });
            console.log($scope.booksArr);
         });
-    }]);
+    }])
+    .directive("navBar", function(){
+        return {
+            restrict: "E",
+            templateUrl: "/public/navbar.html"
+        }
+    })
     
 })();

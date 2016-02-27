@@ -1,3 +1,4 @@
+<div class="text-center">Pending Requests</div>
 <table class="table table-striped">
     <tr>
         <th>User</th>
@@ -9,8 +10,25 @@
         <td>{{req.requestedBy[0].uname}}</td>
         <td>{{req.title}}</td>
         <td>{{req.requestedBy.length - 1}}</td>
-        <td class="what"><button class='approve' ng-attr-nhref='/approve?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Approve</button> <br> <button class="deny" ng-href='/deny?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Deny</a></td>
+        <td><button class='approve' ng-href='/approve?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Approve</button> <br> <button class="deny" ng-href='/deny?uid={{req.requestedBy[0].uid}}&title={{req.title}}'>Deny</a></td>
     </tr>
 </table>
 
+<br>
+
+<div class="text-center">Current Loans</div>
+<table class="table table-striped">
+    <tr>
+        <th>User</th>
+        <th>Title</th>
+        <th>Waiting List</th>
+        <th>Actions</th>
+    </tr>
+    <tr on-repeat-done="domain_done" ng-repeat="loan in loans">
+        <td>{{loan.onLoanTo.uname}}</td>
+        <td>{{loan.title}}</td>
+        <td>{{loan.requestedBy.length}}</td>
+        <td><button>Confirm Returned</button></td>
+    </tr>
+</table>
 <!--Maybe add a notification if a request is approve?-->

@@ -141,7 +141,7 @@ module.exports = function(){
                     rArr.push({title: curr.title, requestedBy: curr.requestedBy});
                 } else {
                     if(curr.onLoan){
-                        lArr.push({title: curr.title, onLoanTo: curr.onLoanTo});
+                        lArr.push({title: curr.title, onLoanTo: curr.onLoanTo, requestedBy: curr.requestedBy});
                     }
                 }
             });
