@@ -56,6 +56,24 @@
                        });
 
                    });
+                   domainElement.find('.return').click(function(){
+                       $http.get($(this).attr('ng-href')).then(function(result){
+                           if(result.data.success){console.log("Success"); console.log(result);
+                               var x = scope.loans.findIndex(function(curr){
+                                   return curr.title == miniscope.loan.title;
+                               });
+                               var temp = scope.loans[x];
+                                scope.loans.splice(x, 1);
+                                if(temp.requested){
+                                scope.requests.push({title: temp.title, requestedBy: temp.requestedBy})
+                                }
+                                $compile(elem)(scope);
+                                
+                           }
+                           else{console.log("Failed"); console.log(result);}
+                       });
+
+                   });
                });
            }
        };

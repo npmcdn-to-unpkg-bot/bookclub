@@ -141,7 +141,7 @@ module.exports = function(){
                     rArr.push({title: curr.title, requestedBy: curr.requestedBy});
                 } else {
                     if(curr.onLoan){
-                        lArr.push({title: curr.title, onLoanTo: curr.onLoanTo, requestedBy: curr.requestedBy});
+                        lArr.push({title: curr.title, onLoanTo: curr.onLoanTo, requestedBy: curr.requestedBy, requested: curr.requested});
                     }
                 }
             });
@@ -220,7 +220,7 @@ module.exports = function(){
            if(result.books[x].onLoanTo.uid == req.query.uid){
                result.books[x].onLoanTo = {uname: "", uid: 0};
                result.books[x].onLoan = false;
-               result.save(function(err){if(err){res.json({err: err});}res.json({"success": "The book has been returned to your library."});})
+               result.save(function(err){if(err){res.json({err: err});} res.json({"success": "The book has been returned to your library."});})
            } else {
                res.json({err: "This request is invalid."});
            }

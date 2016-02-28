@@ -3,7 +3,7 @@
 (function(){
     
     angular.module('oneBook', [])
-    .controller('oB', ["$scope", "$http", "$location", function($scope, $http, $location){
+    .controller('oB', ["$scope", "$http", "$location", '$window', function($scope, $http, $location, $window){
         $http.get('/myid').then(function(result){
             console.log(result.data.myid);
             $scope.myid = Number.parseInt(result.data.myid);
@@ -36,6 +36,22 @@
            });
            console.log($scope.booksArr);
         });
+        
+        $scope.makeRequest = function($event){
+            $http.get($($event.currentTarget).attr('ng-href')).then(function(result){
+                console.log(result);
+                if(result.data.success || result.data.err){
+                    if(result.data.success){
+                        console.log(result.data.success);
+                        $($event.currentTarget).parent().html('You have requested this book.');
+                    } else {
+                        console.log(result.data.err);
+                    }
+                } else {
+                    $window.location.replace('/login');
+                }
+            });
+        }
     }])
     .directive("navBar", function(){
         return {
@@ -43,5 +59,4 @@
             templateUrl: "/public/navbar.html"
         }
     })
-    
 })();
