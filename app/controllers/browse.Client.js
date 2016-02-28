@@ -21,6 +21,12 @@
            restrict: "E",
            templateUrl: '/public/allBookGal.html',
        };
+    })
+    .directive("navBar", function(){
+        return {
+            restrict: "E",
+            templateUrl: "/public/navbar.html"
+        };
     });
     
 })();

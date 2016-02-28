@@ -97,6 +97,9 @@ module.exports = function(app, passport){
     app.route('/deny')
     .get(isLoggedIn, pSjsI.deny);
     
+    app.route('/return')
+    .get(isLoggedIn, pSjsI.return);
+    
     app.route('/auth/facebook')
     .get(passport.authenticate('facebook'));
     

@@ -210,4 +210,23 @@ module.exports = function(){
         });
     };
     
+    this.return = function(req, res){
+        console.log("Returned");
+        User.findById(req.user.id).then(function(result){
+           var x = result.books.findIndex(function(curr){
+              return req.query.title == curr.title; 
+           });
+           
+           if(result.books[x].onLoanTo.uid == req.query.uid){
+               result.books[x].onLoanTo = {uname: "", uid: 0};
+               result.books[x].onLoan = false;
+               result.save(function(err){if(err){res.json({err: err});}res.json({"success": "The book has been returned to your library."});})
+           } else {
+               res.json({err: "This request is invalid."});
+           }
+           
+        
+        });
+    };
+    
 };
