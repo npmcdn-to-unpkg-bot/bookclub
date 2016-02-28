@@ -58,9 +58,13 @@ module.exports = function(){
         User.findById(req.user.id, function(err, result){
             if(err){res.send("There was an error");}
             if(result){
+                if(req.body.name){
                 result.name = req.body.name;
-                result.city = req.body.city;
-                result.state = req.body.state;
+                } else {}
+                if(req.body.city){
+                result.city = req.body.city;} else {}
+                if(req.body.state){
+                result.state = req.body.state;} else {}
                 
                 result.save(function(err){if(err){res.send(err);} res.redirect('/settings#success');});
             }
