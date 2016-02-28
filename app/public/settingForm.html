@@ -1,18 +1,24 @@
-<form action='/changemy' method='POST'>
+<div class="container text-center">
+    <br>
+<form class='form-horizontal' action='/changemy' method='POST'>
     <div class="form-group">
-        <label for="name">
+        <label class="control-label col-sm-2 col-sm-offset-1" for="name">Name: </label>
+        <div class="col-sm-6">
             <input type="text" name="name" placeholder='{{myname}}' class='form-control'/>
-        </label>
+        </div>
     </div>
     <div class='form-group'>
-        <label for="city">
+        <label class="control-label col-sm-2 col-sm-offset-1" for="city">City: </label>
+        <div class="col-sm-6">
             <input type="text" name="city" class='form-control' placeholder='{{mycity}}'/>
-        </label>
+        </div>
     </div>
     <div class='form-group'>
-        <label for="state">
+        <label class="control-label col-sm-2 col-sm-offset-1" for="state">State: </label>
+        <div class="col-sm-6">
             <input type="text" name="state" class='form-control' placeholder='{{mystate}}'/>
-        </label>
+        </div>
     </div>
     <input type="submit" value="Submit"/>
 </form>
+</div>

@@ -10,6 +10,7 @@
           $scope.mybooks = result.data.books;
           $scope.mycity = result.data.city;
           $scope.mystate = result.data.state;
+          $scope.myid = result.data._id;
         });
     }])
     .directive('settingForm', function(){
@@ -17,6 +18,12 @@
            restrict: 'E',
            templateUrl: '/public/settingForm.html'
        } 
+    })
+    .directive('profileBox', function(){
+        return {
+            restrict: 'E',
+            templateUrl: 'public/profileBox.html'
+        };
     });
     
 })();

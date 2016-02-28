@@ -14,6 +14,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
     </head>
     <body>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/browse">Browse Books</a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/myrequests">Trade Requests</a></li>
+                            <li><a href="/profile">Your Profile</a></li>
+                            <li><a href="/settings">Settings</a></li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+          </div><!-- /.container-fluid -->
+        </nav>
         <profile-box></profile-box>
         <setting-form></setting-form>
     </body>

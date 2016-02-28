@@ -80,7 +80,7 @@ module.exports = function(app, passport){
     });
     
     app.route('/changemy')
-    .post(pSjsI.editProfile);
+    .post(isLoggedIn, pSjsI.editProfile);
     
     app.route('/addbook')
     .get(isLoggedIn, pSjsI.createBook);
