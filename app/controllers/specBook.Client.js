@@ -52,6 +52,12 @@
                 }
             });
         }
+        
+        $scope.finder = function(objArr, id){
+            var x = objArr.findIndex(function(curr){return curr.uid == id});
+            console.log(x);
+            if(x>-1){return true;} else {return false;}
+        }
     }])
     .directive("navBar", function(){
         return {
