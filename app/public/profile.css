@@ -16,14 +16,14 @@ li {
     display: block;
     width: 100px;
     height: 60px;
-    background-color: rgba(255,0,0,0.5);
+    background-color: rgba(255, 192, 203, 0.8);
     text-overflow: ellipsis;  
     white-space: normal;
     overflow: auto;
 }
 
 .ulcntr {
-    background-color: gray;
+    background-color: rgba(128, 0, 128, 0.7);
     width: 1400px;
     
 }
