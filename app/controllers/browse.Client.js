@@ -20,6 +20,19 @@
        return {
            restrict: "E",
            templateUrl: '/public/allBookGal.html',
+           linK: function(scope, elem){
+               var grid = elem.find('.grid').isotope({
+                  getSortData: {
+                    title: '.titles',
+                    authors: '.authors',
+                    tags: '.tags'
+                  },
+                  itemSelector: '.grid-item',
+                  layoutMode: 'masonry'
+                });
+                
+                grid.isotope('reloadItems');
+           }
        };
     })
     .directive("navBar", function(){
