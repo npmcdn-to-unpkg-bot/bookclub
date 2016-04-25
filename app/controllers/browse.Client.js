@@ -32,6 +32,7 @@
                 });
                 
                 grid.isotope('reloadItems');
+                grid.arrange();
            }
        };
     })
