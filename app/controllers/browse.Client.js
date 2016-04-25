@@ -21,7 +21,8 @@
            restrict: "E",
            templateUrl: '/public/allBookGal.html',
            linK: function(scope, elem){
-               var grid = elem.find('.grid').isotope({
+               var grid = elem.find('.grid')
+               var $grid = grid.isotope({
                   getSortData: {
                     title: '.titles',
                     authors: '.authors',
@@ -35,6 +36,7 @@
                 setTimeout(function(){
                 grid.arrange();
                 grid.layout();
+                $grid.isotope();
                 }, 100);
            }
        };
