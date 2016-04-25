@@ -71,6 +71,19 @@
     });
  });
 */ 
+
+ var grid = $('.grid').isotope({
+      getSortData: {
+        title: '.titles',
+        authors: '.authors',
+        tags: '.tags'
+      },
+      itemSelector: '.grid-item',
+      layoutMode: 'masonry'
+    });
+
+scope.grid.masonry('reloadItems');
+
 setTimeout(function(){
  var grid = $('.grid').isotope({
       getSortData: {
