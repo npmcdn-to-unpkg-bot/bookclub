@@ -32,7 +32,10 @@
                 });
                 
                 grid.isotope('reloadItems');
+                setTimeout(function(){
                 grid.arrange();
+                grid.layout();
+                }, 100);
            }
        };
     })
