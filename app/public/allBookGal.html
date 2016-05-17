@@ -35,9 +35,10 @@
         margin: 0 auto;
     }
 </style>
+
 <div class="btn-group sbtns"><button sort-by="title">Title</button><button sort-by="authors">Authors</button><button sort-by="tags">Tags</button></div>
 <div class="grid">
-    <div class="grid-item text-center" ng-repeat="mybook in mybooks">
+    <div class="grid-item text-center" ng-repeat="mybook in mybooks" iso-helper>
         <a ng-href="/book/{{mybook.title}}">
         <div class="titles">
             {{mybook.title}}
@@ -55,9 +56,10 @@
         </a>
     </div>
 </div>
-<!--
-<script type="text/javascript">
 
+
+
+<script type="text/javascript">
 /*
  var grid = $('.grid').imagesLoaded(function(){
      grid.isotope({
@@ -71,19 +73,7 @@
     });
  });
 */ 
-
- var grid = $('.grid').isotope({
-      getSortData: {
-        title: '.titles',
-        authors: '.authors',
-        tags: '.tags'
-      },
-      itemSelector: '.grid-item',
-      layoutMode: 'masonry'
-    });
-
-scope.grid.masonry('reloadItems');
-
+/*
 setTimeout(function(){
  var grid = $('.grid').isotope({
       getSortData: {
@@ -95,11 +85,15 @@ setTimeout(function(){
       layoutMode: 'masonry'
     });
     
+    grid.isotope('reloadItems');
+    grid.isotope();
+    
 $('.sbtns').on( 'click', 'button', function() {
   var sortByValue = $(this).attr('sort-by');
   grid.isotope({ sortBy: sortByValue });
 });
-},500);
+},1500);
+*/
 /*   
     grid.imagesLoaded().progress( function() {
     grid.isotope('layout');
@@ -110,4 +104,3 @@ setTimeout(function() {console.log("One"); grid.isotope('reloadItems')}, 3000);
 */
 
 </script>
--->
