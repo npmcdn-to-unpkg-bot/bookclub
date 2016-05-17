@@ -49,6 +49,7 @@
         return {
             restrict: "A",
             link: function(scope, elem, attr){
+                var x = elem.parent();
                 
                 //console.log("This is pass : " + scope.$index + " . First? " + scope.$first + " . Middle? " + scope.$middle + " . Last? " + scope.$last);
                 //console.log(scope);
@@ -57,7 +58,7 @@
                     console.log("First is true and scope.grid is initialized.");
                     scope.grid = elem.parent();
                     //console.log(scope.grid);
-                    var x = scope.grid.isotope({
+                    x = scope.grid.isotope({
                       masonry: {
                           columnWidth: 250
                       },
@@ -81,6 +82,11 @@
                     })
                     }, 2000)
                 }
+                
+                scope.$watch(attr.ngModel, function(){
+                   x.isotope('reloadItems'); 
+                   x.isotope();
+                });
 
             }
         }
